@@ -1,0 +1,23 @@
+#training options
+NAME: DLv3_L8
+STEPS_PER_EPOCH: 1000
+EPOCHS: 200
+BATCH_SIZE: 8
+PATCH_SIZE: 257
+LR: 0.001
+MOMENTUM: 0.99
+
+#Base model options
+SENSEI: false
+MODEL_TYPE: 'DeepLabv3'
+S2_L8_COMMON: False # Used to create common-band  model (only works for models without sensei, and only of use when using training data from Sentinel-2 AND Landsat 8)
+
+#Data options
+TRAIN_DIRS:
+  - '/path/to/Landsat8/CCA'
+VALID_DIRS:
+  - '/path/to/Landsat8/SPARCS'
+  
+SYNTHETIC_BANDS: false # when using SEnSeI, set true to add bands together in certain combinations to increase variation (see SYNTHETIC_DICT in data/utils.py for definitions)
+DESCRIPTOR_STYLE: 'log' # best to keep this as it is, SEnSeI is currently only trained with this style, although loader.Dataloader also supports 'bandpass', which has 6 features per spectrum
+CLASSES: 2

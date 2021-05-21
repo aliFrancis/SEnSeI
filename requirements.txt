@@ -1,0 +1,10 @@
+imageio==2.9.0
+matplotlib==3.3.2
+numpy==1.17.4
+scikit-image==0.16.2
+scipy==1.5.2
+tensorboard==2.4.1
+tensorflow==2.2.0
+tensorflow-addons==0.11.2
+tensorflow-gpu==2.2.0
+yaml==0.2.5

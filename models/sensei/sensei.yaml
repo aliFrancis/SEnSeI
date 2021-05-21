@@ -1,0 +1,57 @@
+---
+descriptor_size: 3
+DESCRIPTOR_BLOCK:
+  block_name: DESCRIPTOR_BLOCK
+  layer_sizes:
+    - 16
+    - 16
+    - 32
+    - 16
+    - 16
+    - 64
+    - 128
+    - 64
+  final_size: 64
+  skips: add
+  lasso_regularization: true
+PERMUTED_DESCRIPTOR_BLOCK:
+  block_name: PERMUTED_DESCRIPTOR_BLOCK
+  layer_sizes:
+    - 128
+    - 128
+    - 128
+    - 64
+  final_size: 64
+  skips: null
+  concat_input_output: true
+  lasso_regularization: true
+  pooling: mean
+COMBINED_DESCRIPTOR_BLOCK:
+  block_name: COMBINED_DESCRIPTOR_BLOCK
+  layer_sizes:
+    - 128
+    - 256
+    - 128
+    - 96
+    - 64
+    - 128
+    - 64
+  final_size: 64
+  skips: add
+  lasso_regularization: true
+
+# BAND_INTEGRATION_BLOCK:
+#   block_name: BAND_INTEGRATION_BLOCK
+#   layer_sizes:
+#     - 32
+#   final_size: 64
+#   skips: false
+#   lasso_regularization: true
+#   sum_outputs: true
+BAND_MULTIPLICATION_BLOCK:
+  block_name: BAND_MULTIPLICATION_BLOCK
+  offset: 0.5
+  sum_outputs: true
+  pooling: mean
+
+...
