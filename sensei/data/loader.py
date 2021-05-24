@@ -469,7 +469,6 @@ class SlidingWindow(Dataloader):
                     ensemble_ims = ims[:,band_indices,...]
                     ensemble_descriptors = descriptors[:,band_indices,...]
                     masks[idxs,...] += self.model.predict((ensemble_ims,ensemble_descriptors))
-                    print(np.mean(masks[idxs,...]))
                 masks[idxs,...] = masks[idxs,...]/(self.ensemble+1)
 
         for ymin,xmin,m in zip(self.yy.ravel(),self.xx.ravel(),masks):
