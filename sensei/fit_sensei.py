@@ -1,17 +1,16 @@
 import os
 import sys
-import yaml
 import tensorflow as tf
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Lambda
 from tensorflow.keras.optimizers import Adagrad, SGD, RMSprop
 from tensorflow.keras.callbacks import TensorBoard, ModelCheckpoint
+from tensorflow.python.framework.ops import disable_eager_execution
+from tensorflow.keras.mixed_precision import experimental as mixed_precision
+import yaml
 
 from sensei.data.loader import SEnSeITrainer
 from sensei import spectral_encoders as encs
-
-from tensorflow.python.framework.ops import disable_eager_execution
-from tensorflow.keras.mixed_precision import experimental as mixed_precision
 
 
 tf.config.experimental.set_memory_growth(

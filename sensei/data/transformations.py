@@ -1,9 +1,9 @@
+import copy
 import numpy as np
 import os
+import random
 from scipy import misc
 import time
-import random
-import copy
 
 class Base:
     """

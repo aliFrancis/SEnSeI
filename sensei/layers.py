@@ -1,11 +1,11 @@
+import numpy as np
+import tensorflow as tf
 from tensorflow.python.keras import backend as K
 from tensorflow.python.keras.layers import Layer
-import tensorflow as tf
 from tensorflow.python.keras.utils import conv_utils
 from tensorflow.python.ops import nn_ops
 from tensorflow.python.ops import nn
 from tensorflow.python.ops import array_ops
-import numpy as np
 
 
 class PermuteDescriptors(Layer):

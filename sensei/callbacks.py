@@ -1,13 +1,11 @@
-from tensorflow.keras.callbacks import Callback, TensorBoard
-import tensorflow as tf
-
 import io
-import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import numpy as np
 from skimage import exposure
-
+from tensorflow.keras.callbacks import Callback, TensorBoard
+import tensorflow as tf
 
 class LearningRateLogger(tf.keras.callbacks.Callback):
     def __init__(self):

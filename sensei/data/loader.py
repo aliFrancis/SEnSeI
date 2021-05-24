@@ -1,17 +1,17 @@
-from tensorflow.keras.utils import Sequence
-import tensorflow as tf
 from concurrent.futures import ThreadPoolExecutor
+from imageio import imread
+import json
 import numpy as np
 import os
-from scipy import misc
+from pprint import pprint
 import random
-import json
+from scipy import misc
+from tensorflow.keras.utils import Sequence
+import tensorflow as tf
+import warnings
+
 from sensei.data import transformations as trf
 from sensei.data import utils
-from imageio import imread
-import warnings
-from pprint import pprint
-
 from sensei.data.utils import DESCRIPTORS
 
 class Dataloader(Sequence):

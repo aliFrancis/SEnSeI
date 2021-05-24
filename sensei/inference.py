@@ -1,23 +1,24 @@
 import matplotlib.pyplot as plt
+import numpy as np
+import os
+import random
+import sys
 import tensorflow as tf
 from tensorflow.keras.models import Model, load_model
 from tensorflow.keras.layers import Input, Lambda
 from tensorflow.keras import backend as K
 from tensorflow.keras.metrics import AUC, MeanIoU
-from sensei import models, spectral_encoders as encs
-from sensei.layers import Flatten_2D_Op, PermuteDescriptors, Tile_bands_to_descriptor_count, Concatenate_bands_with_descriptors
-from sensei.data.loader import SlidingWindow
-from sensei.deeplabv3p import Deeplabv3
-from sensei.utils import OneHotMeanIoU
 from tensorflow.python.framework.ops import disable_eager_execution
 from tensorflow.keras.mixed_precision import experimental as mixed_precision
 from tensorflow.keras.optimizers import SGD
 from tensorflow_addons.layers import GroupNormalization
 from skimage import exposure
-import random
-import os
-import numpy as np
-import sys
+
+from sensei import models, spectral_encoders as encs
+from sensei.layers import Flatten_2D_Op, PermuteDescriptors, Tile_bands_to_descriptor_count, Concatenate_bands_with_descriptors
+from sensei.data.loader import SlidingWindow
+from sensei.deeplabv3p import Deeplabv3
+from sensei.utils import OneHotMeanIoU
 
 
 # ---TO BE CONFIGURED BY USER---

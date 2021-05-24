@@ -1,7 +1,6 @@
-import os
-import yaml
-import sys
 import numpy as np
+import os
+import sys
 import tensorflow as tf
 from tensorflow.keras.callbacks import TensorBoard, ModelCheckpoint
 from tensorflow.keras.layers import Input
@@ -11,6 +10,7 @@ from tensorflow.keras.mixed_precision import experimental as mixed_precision
 from tensorflow.keras.models import Model, load_model
 from tensorflow.keras.optimizers import SGD
 from tensorflow_addons.layers import GroupNormalization
+import yaml
 
 from sensei.utils import OneHotMeanIoU
 from sensei.data.loader import Dataloader, CommonBandsDataloader
@@ -18,7 +18,6 @@ from sensei.data.utils import SYNTHETIC_DICT
 from sensei.data import transformations as trf
 from sensei.callbacks import LearningRateLogger, ImageCallback
 from sensei import models
-
 from sensei.layers import Flatten_2D_Op, PermuteDescriptors, Tile_bands_to_descriptor_count, Concatenate_bands_with_descriptors
 from sensei.deeplabv3p import Deeplabv3
 

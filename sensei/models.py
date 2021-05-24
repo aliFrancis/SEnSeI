@@ -1,9 +1,9 @@
+import tensorflow as tf
+import tensorflow.keras.backend as K
 from tensorflow.keras.layers import Input, Conv2D, Concatenate, BatchNormalization, \
     LeakyReLU, Conv2DTranspose, Activation, Reshape, Dense, Lambda, Permute, Add
-import tensorflow.keras.backend as K
 from tensorflow.keras.models import Model
 from tensorflow.keras import regularizers
-import tensorflow as tf
 
 from sensei import layers
 
