@@ -55,7 +55,7 @@ unzip -d datasets/downloaded/Sentinel-2 ~/Downloads/Sentinel-2-masks.zip
 Finally, prepared using the _prepare_dataset.py_ script included in _eo4ai_, with a resolution of 20m, in patches of size 263 pixels across, with a stride of 253 pixels (these values can of course be changed to suit your needs):
 
 ```
-python eo4ai/prepare_dataset.py -r 20 -p 263 -s 253 S2IRIS513 datasets/downloaded/Sentinel-2 datasets/processed/Sentinel-2
+python eo4ai/prepare_dataset.py -g -r 20 -p 263 -s 253 S2IRIS513 datasets/downloaded/Sentinel-2 datasets/processed/Sentinel-2
 ```
 
 A similar procedure is possible for the other datasets supported by _eo4ai_, and should produce data compatible with the models in this repository. Note that the [Landsat 8 CCA dataset](https://landsat.usgs.gov/landsat-8-cloud-cover-assessment-validation-data) (also known as the Biome dataset) contains the panchromatic band, whilst the [SPARCS dataset](https://www.usgs.gov/core-science-systems/nli/landsat/spatial-procedures-automated-removal-cloud-and-shadow-sparcs) does not. If a non-sensor independent model is to be used on both, eo4ai's *-b* switch can be used to exclude the panchromatic band from the processed Biome dataset, making them compatible.
