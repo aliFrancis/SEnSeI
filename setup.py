@@ -8,6 +8,6 @@ setup(
    packages=['sensei',
              'sensei/data'
              ],
-   license='MIT',
+   license='GNU General Public License v3 (GPLv3)',
    long_description=open('README.md').read()
 )
