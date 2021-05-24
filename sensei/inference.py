@@ -25,12 +25,12 @@ from sensei.utils import OneHotMeanIoU
 SCENEDIR = 'directory/of/scenes/as/numpy/arrays' # arrays in normalised reflectance, X-by-Y-by-channels
 TRUTHDIR = 'directory/of/groundtruths/as/onehot/numpy/arrays' # Optional, set to False if no groundtruth available
 SATELLITE = 'Sentinel2' # See DESCRIPTORS dict in sensei/data/utils.py for options, or to add others
-OUTDIR = True # Optional, set to False if you don't want to save predictions
+OUTDIR = False # Optional, set to False if you don't want to save predictions
 VISUALISE = True
 STRIDE = 256
 MODELS = [
       {'name':'EXAMPLE',
-       'path':'<path/to/project>/models/example/SEnSeI-DLv3_S2L8.h5'},
+       'path':'models/example/SEnSeI-DLv3_S2L8.h5'},
      ]
 
 
@@ -43,13 +43,12 @@ if __name__=='__main__':
     policy = mixed_precision.Policy('mixed_float16')
     mixed_precision.set_policy(policy)
 
-
-
     for model in MODELS:
         print('\n'+model['name']+'\n')
         name = model['name']
 
-        os.makedirs(OUTDIR,exist_ok=True)
+        if OUTDIR:
+            os.makedirs(OUTDIR,exist_ok=True)
 
         model = load_model(
                     model['path'],
@@ -62,18 +61,15 @@ if __name__=='__main__':
                          'OneHotMeanIoU':OneHotMeanIoU
                          })
 
-
         scenes = os.listdir(SCENEDIR)
         for i,s in enumerate(scenes):
-            print(i,s,end='\r')
-            scene = np.load(os.path.join(SCENEDIR,s+'.npy')
-
+            print(i,s.replace('.npy',''),end='\r')
+            scene = np.load(os.path.join(SCENEDIR,s))
 
             swind = SlidingWindow(scene,model,satellite=SATELLITE,batch_size=8,patch_size=257,bands='all',stride=STRIDE)
             mask = swind.predict()
             if OUTDIR:
-                np.save(os.path.join(out_dir,s+'.npy'),mask)
-
+                np.save(os.path.join(OUTDIR,s),mask)
 
             if VISUALISE:
                 mask = mask[...,-1]
@@ -82,16 +78,16 @@ if __name__=='__main__':
                 ax.imshow(exposure.equalize_adapthist(norm_scene,clip_limit=0.01))
                 disp_mask = np.zeros((*mask.shape,4))
                 if TRUTHDIR:
-                    truth = np.load(os.path.join(TRUTHDIR,s+'.npy'))
+                    truth = np.load(os.path.join(TRUTHDIR,s))
                     truth = np.argmax(truth,axis=-1)
-                    disp_mask[(mask>0.5)*(truth==1)]=[0,1.0,0,0.2]
-                    disp_mask[(mask<0.5)*(truth==1)]=[1.0,0,0,0.2]
-                    disp_mask[(mask>0.5)*(truth==0)]=[1.0,1.0,0,0.2]
+                    disp_mask[(mask>0.5)*(truth==1)]=[0,1.0,0,0.1]
+                    disp_mask[(mask<0.5)*(truth==1)]=[1.0,0,0,0.1]
+                    disp_mask[(mask>0.5)*(truth==0)]=[1.0,1.0,0,0.1]
                 else:
-                    disp_mask[mask>0.5]=[0.9,0,1.0,0.2]
+                    disp_mask[mask>0.5]=[0.9,0,1.0,0.1]
 
                 ax.imshow(disp_mask)
-                ax.set_title(s,fontsize=16)
+                ax.set_title(s.replace('.npy',''),fontsize=16)
                 ax.set_xticks([])
                 ax.set_yticks([])
                 fig.tight_layout()
